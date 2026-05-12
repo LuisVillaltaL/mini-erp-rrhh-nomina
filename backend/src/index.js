@@ -1,22 +1,68 @@
+// backend/src/index.js
+'use strict';
+
 const express = require('express');
-const cors = require('cors');
+const cors    = require('cors');
 require('dotenv').config();
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+require('./config/db');
 
-// Middlewares
-app.use(cors());
+const { verificarToken } = require('./middleware/authMiddleware');
+
+const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
-// Importar Rutas
-const empleadosRoutes = require('./routes/empleados');
-// const dashboardRoutes = require('./routes/dashboard');
+console.log('--- Iniciando Servidor Mini ERP ---');
 
-// Registrar Rutas
-app.use('/api/empleados', empleadosRoutes);
-// app.use('/api/dashboard', dashboardRoutes);
+// ── Publica ────────────────────────────────────────────────────
+try {
+    app.use('/api/auth', require('./routes/auth'));
+    console.log('STATUS: /api/auth cargado');
+} catch (err) {
+    console.error('ERROR /api/auth:', err.message);
+}
 
+// ── Protegidas ─────────────────────────────────────────────────
+const rutas = [
+    { path: '/api/dashboard',     file: './routes/dashboard'     },
+    { path: '/api/nominas',       file: './routes/nominas'       },
+    { path: '/api/rrhh',          file: './routes/rrhh'          },
+    { path: '/api/departamentos', file: './routes/departamentos' },
+    { path: '/api/cargos',        file: './routes/cargos'        },
+];
+
+rutas.forEach(({ path, file }) => {
+    try {
+        app.use(path, verificarToken, require(file));
+        console.log('STATUS: ' + path + ' cargado');
+    } catch (err) {
+        console.error('ERROR ' + path + ': ' + err.message);
+    }
+});
+
+app.get('/api/health', (req, res) =>
+    res.json({ status: 'ok', timestamp: new Date().toISOString() })
+);
+
+app.use((req, res) =>
+    res.status(404).json({ error: 'Ruta no encontrada: ' + req.path })
+);
+
+app.use((err, req, res, next) => {
+    console.error('[ERROR GLOBAL]', err.stack);
+    res.status(500).json({ error: 'Error interno del servidor' });
+});
+
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log('------------------------------------');
+    console.log('Servidor listo en el puerto: ' + PORT);
+    console.log('URL: http://localhost:' + PORT);
+    console.log('------------------------------------');
 });

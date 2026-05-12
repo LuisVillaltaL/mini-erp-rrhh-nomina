@@ -1,0 +1,41 @@
+/* frontend/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Tu paleta del dashboard (estilo Duralux/Qovex) ── */
+:root {
+  --sidebar-bg:      #0f172a;   /* Azul noche profundo */
+  --sidebar-hover:   #1e293b;
+  --sidebar-active:  #1d4ed8;
+  --sidebar-text:    #94a3b8;
+  --sidebar-text-active: #ffffff;
+  --sidebar-border:  #1e293b;
+  --sidebar-width:   240px;
+
+  --topbar-bg:       #ffffff;
+  --topbar-border:   #e2e8f0;
+  --topbar-height:   60px;
+
+  --body-bg:         #f1f5f9;
+  --card-bg:         #ffffff;
+  --card-border:     #e2e8f0;
+  --card-shadow:     0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07);
+
+  --accent:          #1d4ed8;
+  --accent-light:    #dbeafe;
+  --text-primary:    #0f172a;
+  --text-secondary:  #64748b;
+  --text-muted:      #94a3b8;
+
+  --success:         #10b981;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--body-bg);
+  color: var(--text-primary);
+}
