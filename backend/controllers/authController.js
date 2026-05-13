@@ -1,4 +1,3 @@
-// backend/controllers/authController.js
 'use strict';
 
 const bcrypt = require('bcrypt');

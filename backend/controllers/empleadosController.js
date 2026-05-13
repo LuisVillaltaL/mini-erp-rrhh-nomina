@@ -2,8 +2,8 @@
 //
 // Usa el pool centralizado de src/config/db.js.
 // Columnas de la tabla empleados:
-//   id, codigo, nombres, apellidos, dpi, email, telefono,
-//   departamento_id, cargo_id, fecha_ingreso, tipo_contrato, estado
+// id, codigo, nombres, apellidos, dpi, email, telefono,
+// departamento_id, cargo_id, fecha_ingreso, tipo_contrato, estado
 
 'use strict'
 
@@ -12,7 +12,7 @@ const db = require('../src/config/db')
 // ── Helpers ───────────────────────────────────────────────────
 
 /**
- * Genera el siguiente codigo de empleado: EMP-001, EMP-002, ...
+ * Genera el siguiente codigo de empleado:
  */
 async function generarCodigo() {
   const { rows } = await db.query(

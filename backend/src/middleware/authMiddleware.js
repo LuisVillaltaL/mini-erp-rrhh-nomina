@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
  
-const JWT_SECRET = process.env.JWT_SECRET || 'mini_erp_secret_cambia_esto'
+const JWT_SECRET = process.env.JWT_SECRET || 'mini_erp_dev_secret_2025';
  
 const verificarToken = (req, res, next) => {
   const authHeader = req.headers['authorization']

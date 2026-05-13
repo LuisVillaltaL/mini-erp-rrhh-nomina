@@ -54,7 +54,7 @@ export default function LoginPage() {
                 width: '100%', maxWidth: '400px',
                 boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
             }}>
-                <h2 style={{ marginBottom: '8px', color: '#1e293b' }}>Bienvenido al ERP</h2>
+                <h2 style={{ marginBottom: '8px', color: '#1e293b' }}>Módulo de Recursos Humanos</h2>
                 <p style={{ marginBottom: '24px', color: '#64748b', fontSize: '14px' }}>
                     Ingrese sus credenciales para continuar
                 </p>
@@ -106,9 +106,6 @@ export default function LoginPage() {
                     {loading ? 'Iniciando...' : 'Iniciar Sesión'}
                 </button>
 
-                <div style={{ marginTop: '16px', padding: '10px', background: '#f8fafc', borderRadius: '8px', fontSize: '12px', color: '#64748b' }}>
-                    Usuario: <strong>admin</strong> / Contrasena: <strong>Admin123!</strong>
-                </div>
             </form>
         </div>
     );
