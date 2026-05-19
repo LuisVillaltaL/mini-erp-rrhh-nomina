@@ -6,28 +6,21 @@ import Topbar  from './Topbar'
 
 export default function MainLayout() {
   const [collapsed, setCollapsed] = useState(false)
-
-  const contentLeft = collapsed ? '64px' : 'var(--sidebar-width)'
+  const toggle = () => setCollapsed(c => !c)
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--body-bg)' }}>
-      <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
-
+      <Sidebar collapsed={collapsed} onToggle={toggle} />
       <div style={{
-        marginLeft: contentLeft,
+        marginLeft: collapsed ? '64px' : 'var(--sidebar-width)',
         flex: 1,
         transition: 'margin-left 0.25s ease',
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
       }}>
-        <Topbar sidebarCollapsed={collapsed} />
-
-        <main style={{
-          marginTop: 'var(--topbar-height)',
-          padding: '24px',
-          flex: 1,
-        }}>
+        <Topbar sidebarCollapsed={collapsed} onToggleSidebar={toggle} />
+        <main style={{ marginTop: 'var(--topbar-height)', padding: '24px', flex: 1 }}>
           <Outlet />
         </main>
       </div>

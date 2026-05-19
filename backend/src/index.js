@@ -1,4 +1,3 @@
-// backend/src/index.js
 'use strict';
 
 const express = require('express');
@@ -20,7 +19,6 @@ app.use(express.json());
 
 console.log('--- Iniciando Servidor Mini ERP ---');
 
-// ── Publica ────────────────────────────────────────────────────
 try {
     app.use('/api/auth', require('./routes/auth'));
     console.log('STATUS: /api/auth cargado');
@@ -28,13 +26,14 @@ try {
     console.error('ERROR /api/auth:', err.message);
 }
 
-// ── Protegidas ─────────────────────────────────────────────────
 const rutas = [
-    { path: '/api/dashboard',     file: './routes/dashboard'     },
-    { path: '/api/nominas',       file: './routes/nominas'       },
-    { path: '/api/rrhh',          file: './routes/rrhh'          },
-    { path: '/api/departamentos', file: './routes/departamentos' },
-    { path: '/api/cargos',        file: './routes/cargos'        },
+    { path: '/api/dashboard',      file: './routes/dashboard'      },
+    { path: '/api/nominas',        file: './routes/nominas'        },
+    { path: '/api/rrhh',           file: './routes/rrhh'           },
+    { path: '/api/departamentos',  file: './routes/departamentos'  },
+    { path: '/api/cargos',         file: './routes/cargos'         },
+    { path: '/api/reportes',       file: './routes/reportes'       },
+    { path: '/api/configuracion',  file: './routes/configuracion'  },
 ];
 
 rutas.forEach(({ path, file }) => {
